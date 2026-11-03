@@ -1,56 +1,53 @@
-name: Tự động Build và Xuất bản lên GitHub Pages
 
-# Kích hoạt khi có thay đổi trên nhánh main/master hoặc bấm nút kích hoạt thủ công
+name: Deploy Hinh Hoc 3D to GitHub Pages
+
 on:
   push:
     branches:
       - main
-      - master
   workflow_dispatch:
 
-# Phân quyền cho GitHub Actions để triển khai Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Tránh việc chạy nhiều bản deploy cùng lúc
 concurrency:
-  group: 'pages'
+  group: github-pages
   cancel-in-progress: true
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
-      - name: 1. Tải mã nguồn về máy ảo (Checkout)
-    
-      - name: Thiet lap Node.js 22
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22'
 
-      - name: Cai dat thu vien
+      - name: Install dependencies
         run: npm install
 
-      - name: Build ung dung
-        run: npm run build
-    uses: actions/checkout@v4
-      
-      - name: 4. Biên dịch ứng dụng tĩnh (Vite Build)
+      - name: Build application
+        env:
+          BASE_URL: /hinh-hoc-3d/
         run: npm run build
 
-      - name: 5. Cấu hình GitHub Pages
-        uses: actions/configure-pages@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
-      - name: 6. Tải thư mục dist lên GitHub Pages
+      - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: ./dist
 
-      - name: 7. Triển khai lên GitHub Pages (Deploy)
+      - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
