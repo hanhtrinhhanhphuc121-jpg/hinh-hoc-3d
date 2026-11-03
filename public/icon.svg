@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#31104b" />
+    </linearGradient>
+    <linearGradient id="topFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+    <linearGradient id="leftFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#3730a3" />
+    </linearGradient>
+    <linearGradient id="rightFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#7e22ce" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Outer circular grid accent -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#4338ca" stroke-width="2" stroke-opacity="0.3" stroke-dasharray="8 8" />
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- 3D Polyhedron / Isometric Cube in Center -->
+  <g filter="url(#glow)">
+    <!-- Top Face (Rhombus) -->
+    <polygon points="256,120 380,185 256,250 132,185" fill="url(#topFace)" opacity="0.95" stroke="#c7d2fe" stroke-width="3" stroke-linejoin="round" />
+    
+    <!-- Left Face -->
+    <polygon points="132,185 256,250 256,380 132,315" fill="url(#leftFace)" opacity="0.9" stroke="#c7d2fe" stroke-width="3" stroke-linejoin="round" />
+    
+    <!-- Right Face -->
+    <polygon points="256,250 380,185 380,315 256,380" fill="url(#rightFace)" opacity="0.9" stroke="#c7d2fe" stroke-width="3" stroke-linejoin="round" />
+  </g>
+
+  <!-- Internal Hidden Dashed Lines (Pedagogical Geometry Highlight) -->
+  <line x1="132" y1="185" x2="256" y2="315" stroke="#f43f5e" stroke-width="3" stroke-dasharray="6 6" opacity="0.8" />
+  <line x1="380" y1="185" x2="256" y2="315" stroke="#f43f5e" stroke-width="3" stroke-dasharray="6 6" opacity="0.8" />
+  <line x1="256" y1="120" x2="256" y2="380" stroke="#fbbf24" stroke-width="3" stroke-dasharray="6 6" opacity="0.8" />
+
+  <!-- Vertex Dots with Glowing Accents -->
+  <circle cx="256" cy="120" r="7" fill="#ffffff" stroke="#6366f1" stroke-width="2" />
+  <circle cx="380" cy="185" r="7" fill="#ffffff" stroke="#6366f1" stroke-width="2" />
+  <circle cx="256" cy="250" r="8" fill="#38bdf8" stroke="#ffffff" stroke-width="2" />
+  <circle cx="132" cy="185" r="7" fill="#ffffff" stroke="#6366f1" stroke-width="2" />
+  <circle cx="256" cy="380" r="7" fill="#ffffff" stroke="#6366f1" stroke-width="2" />
+  <circle cx="132" cy="315" r="7" fill="#ffffff" stroke="#6366f1" stroke-width="2" />
+  <circle cx="380" cy="315" r="7" fill="#ffffff" stroke="#6366f1" stroke-width="2" />
+
+  <!-- Modern Math Badge Text "3D" at Bottom -->
+  <g transform="translate(256, 435)">
+    <rect x="-65" y="-18" width="130" height="36" rx="18" fill="#1e1b4b" stroke="#6366f1" stroke-width="2" />
+    <text x="0" y="7" font-family="system-ui, sans-serif" font-weight="800" font-size="18" fill="#38bdf8" text-anchor="middle" letter-spacing="2">HÌNH HỌC 3D</text>
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+name: Tự động Build và Xuất bản lên GitHub Pages
+
+# Kích hoạt khi có thay đổi trên nhánh main/master hoặc bấm nút kích hoạt thủ công
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+# Phân quyền cho GitHub Actions để triển khai Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Tránh việc chạy nhiều bản deploy cùng lúc
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Tải mã nguồn về máy ảo (Checkout)
+        uses: actions/checkout@v4
+
+      - name: 2. Thiết lập môi trường Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: 3. Cài đặt các gói thư viện
+        run: npm install
+
+      - name: 4. Biên dịch ứng dụng tĩnh (Vite Build)
+        run: npm run build
+
+      - name: 5. Cấu hình GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: 6. Tải thư mục dist lên GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: 7. Triển khai lên GitHub Pages (Deploy)
+        id: deployment
+        uses: actions/deploy-pages@v4

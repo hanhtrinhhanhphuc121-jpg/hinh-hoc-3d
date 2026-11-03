@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Hình Học 3D – Phòng Thí Nghiệm Toán Học Tương Tác",
+  "description": "Phòng thí nghiệm hình học không gian 3D tương tác dành cho giáo viên và học sinh: 30 mô hình toán học, nét thấy nét khuất động, hình khai triển 2D, công thức KaTeX chi tiết và bài tập luyện tập.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
