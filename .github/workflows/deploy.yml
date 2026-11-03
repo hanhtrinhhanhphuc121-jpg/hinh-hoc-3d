@@ -27,21 +27,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 1. Tải mã nguồn về máy ảo (Checkout)
-        uses: actions/checkout@v4
-
-      - name: 2. Thiết lập môi trường Node.js 22
+    
+      - name: Thiet lap Node.js 22
         uses: actions/setup-node@v4
         with:
           node-version: 22
-         with:
-  node-version: 22
 
-- name: 3. Cài đặt các gói thư viện
-  run: npm install
-
-      - name: 3. Cài đặt các gói thư viện
+      - name: Cai dat thu vien
         run: npm install
 
+      - name: Build ung dung
+        run: npm run build
+    uses: actions/checkout@v4
+      
       - name: 4. Biên dịch ứng dụng tĩnh (Vite Build)
         run: npm run build
 
